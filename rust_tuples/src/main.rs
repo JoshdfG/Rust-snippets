@@ -1,13 +1,13 @@
 use std::io::{self};
 #[derive(Debug)]
 
-struct User{
-    username: String,
-    email:String,
-    sign_in_count:u64,
-    active:bool,
-}
-#[derive(Debug)]
+// struct User{
+//     username: String,
+//     email:String,
+//     sign_in_count:u64,
+//     active:bool,
+// }
+// #[derive(Debug)]
 
 struct Rectangle{
     width:u32,
@@ -39,7 +39,43 @@ impl Rectangle {
         }
     }
 }
+
+// IpAddrKind is now a custom data type that can now be used somewhere else
+// always specify the data type of a const and know that it must be in caps or cap snake case.
+// note that you namespace the value of an enum under its identifier
+// const FOUR: IpAddrKind = IpAddrKind::V4;
+enum IpAddrKind {
+    V4,
+    v6,
+}
+
+struct IpAddr{
+    kind:IpAddrKind,
+    address:String,
+}
+
+// to eliminalte the stress of having to use an enum and a struct we can instead put the data into 
+// an enum variant look below to see
+
+// the name of each enum variant that we define also becomes a function that constructs an instance of the enum
+
+#[derive(Debug)]
+enum IpAddressKind{
+    v4(String),
+    v6(String),
+}
 fn main() {
+    // enum implementation
+    let four : IpAddressKind = IpAddressKind::v4(String::from("127.3..1"));
+    println!("{:?}",four);
+    let six : IpAddressKind = IpAddressKind::v6(String::from("127..1"));
+    println!("{:?}",six);
+
+    // struct implementation of the same enum
+    let ip = IpAddr {
+        kind : IpAddrKind::V4,
+        address:String::from("127.0.0.1")
+    };
     //using pattern matching to destructure in rust we first have a variable called
     //tup that is binded to the tuple then we use the let keyword
     //to assign tup to three separate variables
@@ -196,14 +232,14 @@ fn main() {
     let slices = &arr[..2];
     println!("The length of the slice is {:?}",slices);
 
-    let user1 = User{
-        email:String::from("slimmy0310@gmail.com"),
-        username:String::from("Josh_dfG"),
-        sign_in_count:1,
-        active:true
-    };
+    // let user1 = User{
+    //     email:String::from("slimmy0310@gmail.com"),
+    //     username:String::from("Josh_dfG"),
+    //     sign_in_count:1,
+    //     active:true
+    // };
 
-    println!("user1 {:?}",user1);
+    // println!("user1 {:?}",user1);
 
     // the implementation checks if rect1 can hold either of the rect3 and rect4
     // this is to show how efficient implementations can be.
@@ -235,6 +271,7 @@ fn main() {
     
 
 
+
 }
 
     // fn cal (rect: &Rectangle)->u32{
@@ -257,3 +294,33 @@ fn main() {
         5
     }
 
+    // another advantage of using enums over structs is that every variant of the enum can have different 
+    // types and amount of data associated with them.
+    // If we wanted to store V4 addresses as four u8 values but still express V6 addresses as one String value, 
+    // we wouldn’t be able to with a struct. Enums handle this case with ease:
+
+    // enum IpAddr {
+    //     V4(u8, u8, u8, u8),
+    //     V6(String),
+    // }
+
+    // let home = IpAddr::V4(127, 0, 0, 1);
+
+    // let loopback = IpAddr::V6(String::from("::1"));
+
+    // another example 
+    // This enum has four variants with different types:
+    enum Message {
+
+    // Quit has no data associated with it at all.
+    Quit,
+    // Move has named fields, like a struct does.
+
+    Move { x: i32, y: i32 },
+    // Write includes a single String.
+
+    Write(String),
+    // ChangeColor includes three i32 values.
+
+    ChangeColor(i32, i32, i32),
+}
