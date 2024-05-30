@@ -22,23 +22,23 @@ fn main() {
         let first_name = NAMES[i];
         let last_name = NAMES[(i + 1) % NAMES.len()];
 
-        println!("Enter age for {} {}", first_name, last_name);
+        println!("Please input age for {} {}", first_name, last_name);
 
         let mut age_input = String::new();
 
         io::stdin()
             .read_line(&mut age_input)
-            .expect("failedd to read line");
+            .expect("Failed to read line");
 
         let age = age_input
             .trim()
             .parse()
-            .expect("Please input the right value");
+            .expect("Please input a valid number");
 
         let status = if age < 20 {
-            Status::Married(age)
-        } else {
             Status::Single(age)
+        } else {
+            Status::Married(age)
         };
 
         people.push(Person {
@@ -49,16 +49,16 @@ fn main() {
     }
 
     for person in &people {
-        if let Status::Married(age) = person.status {
+        if let Status::Married(age) = &person.status {
             println!(
-                "{} {} is Married and is {} years old",
+                "{} {} is Married and is {} years old ",
                 person.first_name, person.last_name, age
-            )
-        } else if let Status::Single(age) = person.status {
+            );
+        } else if let Status::Single(age) = &person.status {
             println!(
                 "{} {} is Single and is {} years old",
                 person.first_name, person.last_name, age
-            )
+            );
         }
     }
 }
