@@ -49,4 +49,52 @@ fn main() {
     for (key, value) in &scores {
         println!("{} {}", key, value);
     }
+
+    println!("---------------------------------------");
+
+    let country1 = String::from("Nigeria");
+    let country2 = String::from("United kingdom");
+
+    let mut nations = HashMap::new();
+
+    nations.insert(country1, 100);
+    nations.insert(country2, 7000);
+
+    let country_name = String::from("");
+    let nation = nations.get(&country_name);
+    for (key, value) in &nations {
+        println!("{} {}", key, value);
+    }
+
+    println!("------------------------------------------");
+
+    let institution1 = String::from("OAU");
+    let institution2 = String::from("Web3Bridge");
+
+    let mut schools = HashMap::new();
+
+    schools.insert(institution1, 1997);
+    schools.insert(institution2, 2019);
+
+    let school_influence = String::from("");
+    let school = schools.get(&school_influence);
+
+    for (key, value) in &schools {
+        println!("{} {}", key, value);
+    }
+
+    let coin = String::from("penny");
+    let coin1 = String::from("quarter");
+
+    let mut coins = HashMap::new();
+
+    coins.insert(coin, 11);
+    coins.insert(coin1, 15);
+
+    let relevance = String::from("");
+    let coin = coins.get(&relevance);
+
+    for (key, value) in &coins {
+        println!("{} {}", key, value);
+    }
 }
