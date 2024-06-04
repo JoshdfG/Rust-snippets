@@ -66,7 +66,7 @@ fn main() {
         println!("{} {}", key, value);
     }
 
-    println!("------------------------------------------");
+    println!("-----------------------------------------");
 
     let institution1 = String::from("OAU");
     let institution2 = String::from("Web3Bridge");
