@@ -97,4 +97,21 @@ fn main() {
     for (key, value) in &coins {
         println!("{} {}", key, value);
     }
+
+    let n = 7;
+    let (results, steps) = sequence(n);
+    println!("Let the results {} be recorded in {} steps", steps, results);
+}
+
+fn sequence(mut n: u64) -> (u64, u32) {
+    let mut count = 0;
+    while n != 1 {
+        if n % 2 == 0 {
+            n /= 2;
+        } else {
+            n = n * 3 + 1;
+        }
+        count += 1;
+    }
+    (n, count)
 }
