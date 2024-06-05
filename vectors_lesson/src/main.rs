@@ -99,19 +99,37 @@ fn main() {
     }
 
     let n = 7;
-    let (results, steps) = sequence(n);
+    let (steps, results) = sequence(n);
     println!("Let the results {} be recorded in {} steps", steps, results);
-}
 
+    let u = "qqqybuwwww";
+    let counter = repetition(u);
+    println!("{}", counter);
+}
+//sequence n!=1
 fn sequence(mut n: u64) -> (u64, u32) {
     let mut count = 0;
     while n != 1 {
         if n % 2 == 0 {
-            n /= 2;
+            n /= 2
         } else {
             n = n * 3 + 1;
         }
         count += 1;
     }
     (n, count)
+}
+
+fn repetition(dna_sequence: &str) -> usize {
+    let mut max_length = 0;
+    let mut current_length = 0;
+
+    for (i, c) in dna_sequence.chars().enumerate() {
+        if i > 0 && dna_sequence.chars().collect::<Vec<_>>()[i - 1] != c {
+            current_length = 0;
+        }
+        current_length += 1;
+        max_length = max_length.max(current_length);
+    }
+    max_length
 }
